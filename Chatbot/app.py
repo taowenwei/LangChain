@@ -4,8 +4,10 @@ from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from htmlTemplates import css, bot_template, user_template
 import ChainOpenAI
+# import ChainLocalLLM
 # import os
 # import pinecone
+
 
 def get_pdf_text(pdf_docs):
     text = ""
@@ -71,7 +73,8 @@ def main():
                 text_chunks = get_text_chunks(raw_text)
 
                 # create conversation chain
-                st.session_state.conversation = ChainOpenAI.createOpenAIChain(text_chunks)
+                st.session_state.conversation = ChainOpenAI.createOpenAIChain(
+                    text_chunks)
 
 
 if __name__ == '__main__':
