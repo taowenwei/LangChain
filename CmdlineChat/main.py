@@ -6,6 +6,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from dotenv import load_dotenv
 import os
+from langchain.llms import GPT4All, Embed4All
 
 def createConversationalChain():
     loader = PyPDFLoader('TheEconomist.2023.08.26.pdf')
@@ -16,8 +17,11 @@ def createConversationalChain():
     memory = ConversationBufferMemory(
         memory_key='chat_history', return_messages=True)
     
+    llm = ChatOpenAI()
+    # llm = GPT4All(model="c:\\Users\\WTAO-WIN\\AppData\Local\\nomic.ai\\GPT4All\\ggml-model-gpt4all-falcon-q4_0.bin")
+
     chain = ConversationalRetrievalChain.from_llm(
-        llm=ChatOpenAI(),
+        llm= llm,
         retriever=retriever,
         memory=memory
     )
