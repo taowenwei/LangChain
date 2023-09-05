@@ -21,6 +21,22 @@ def buildAgentChain(llm):
         return LLMChain(prompt=template, llm=llm, verbose=False)
 
 
+def extract(llm, history):
+    template = PromptTemplate(
+        template="""
+            The history below included contains a user's id and its choice of subscription plan and its start date.
+            Please extract the id, the chozen plan and the start date. 
+            {conversation_hisotry}
+            """,
+        input_variables=['conversation_hisotry'],
+    )
+    chain = LLMChain(prompt=template, llm=llm)
+    aiMessage = chain.__call__(inputs={
+            'conversation_hisotry': history
+    })
+    print(aiMessage["text"])
+
+
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -43,3 +59,5 @@ if __name__ == "__main__":
 
         userMessage = input("Your response: ")
         conversationHisotry.append(f'User: {userMessage} <END_OF_TURN>')
+
+    extract(llm, '\n'.join(conversationHisotry))
