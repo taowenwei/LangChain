@@ -44,9 +44,9 @@ Price: $99.99
 
 3. Then move on to the next sales plan step sequentially.
 
-4. Each time you are done generating, end with '<END_OF_TURN>' to give the user a chance to respond.
+4. Each time you are done generating, end with `<END_OF_TURN>` to give the user a chance to respond.
 
-5. When the entire conversation is over, output <END_OF_CALL>
+5. When the entire conversation is over, output `<END_OF_CALL>`
 
 ## Example of the sales plan execution
 
